@@ -1,0 +1,9 @@
+.characters {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+}
