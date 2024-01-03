@@ -1,9 +1,9 @@
 'use strict';
 
-import './collapsables.js';
-import './preview-palettes.js';
-import './preview-content.js';
-
+import './list.js'
+import './favourites.js'
+import './search.js'
+import './reset.js'
 
 console.log('>> Ready :)');
 
