@@ -1,0 +1,16 @@
+.header {
+  height: 35vh;
+  width: 100%;
+  background-image: url("../images/official-disney-princesses.jpg");
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+
+  &__title {
+    text-align: center;
+    padding-top: 10rem; 
+    font-size: 3rem;
+    font-family: $font-title;
+    color: antiquewhite;
+  }
+}
