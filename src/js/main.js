@@ -1,4 +1,5 @@
 'use strict';
+
 // import './variables.js'
 // import './list.js'
 // import './favourites.js'
@@ -13,8 +14,7 @@ const charactersFavouritesUl = document.querySelector('.js__charactersFavourites
 //DATA
 
 let charactersData = [];
-
-
+let favouritesData = [];
 
 
 //FUNCTIONS
@@ -40,12 +40,28 @@ function renderAll() {
     }
 }
 
+function renderOneFavourite(favouritesData) {  
+    charactersFavouritesUl.innerHTML += `
+        <li class="characters__item">
+            <img src="${favouritesData.imageUrl}" alt="Foto de ${favouritesData.name}"></img>
+            <h3>${favouritesData.name}</h3>
+        </li>
+        `;
+} 
+
+function renderFavourites() {
+    charactersFavouritesUl.innerHTML = '';
+
+    for (const eachFavourite of favouritesData) {
+        renderOne(eachFavourite);
+    }
+}
+
 //FUNCTIONS/EVENTS (HANDLER)
 
 function handleCharacterClick(event) {
 
     const clickedLi = event.currentTarget;
-    clickedLi.classList.add('selected');
     clickedLi.classList.add('hidden');
     charactersFavouritesUl.classList.remove('hidden');
 
@@ -53,12 +69,16 @@ function handleCharacterClick(event) {
 
     const selectedCharacterData = charactersData.find(oneCharacter => oneCharacter.id === clickedCharacterId);
 
-    charactersFavouritesUl.innerHTML +=`
-        <li class="characters__item js__allCharactersLi">
-        <img src="${selectedCharacterData.imageUrl}" alt="Foto de ${selectedCharacterData.name}"></img>
-        <h3>${selectedCharacterData.name}</h3>
-    </li>
-    `;
+    const favouriteCharacterIndex = favouritesData.findIndex(oneCharacter => oneCharacter.id === clickedCharacterId);
+
+    if(favouriteCharacterIndex === -1) {
+        favouritesData.push(selectedCharacterData);
+    } else {
+        favouritesData.splice(favouriteCharacterIndex, 1);
+    }
+
+    renderFavourites();
+    clickedLi.classList.add('selected');
 }
 
 
