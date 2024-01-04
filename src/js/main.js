@@ -8,6 +8,7 @@
 //QUERY SELECTORS
 
 const charactersResultUL = document.querySelector('.js__charactersResultUl');
+const charactersFavourites = document.querySelector('.js__charactersFavourites');
 
 //DATA
 
@@ -20,7 +21,7 @@ let charactersData = [];
 
 function renderOne(charactersData) {
     charactersResultUL.innerHTML += `
-        <li class="characters__item">
+        <li class="characters__item js__allCharactersLi">
             <img src="${charactersData.imageUrl}" alt="Foto de ${charactersData.name}"></img>
             <h3>${charactersData.name}</h3>
         </li>
@@ -31,9 +32,23 @@ function renderAll() {
     for (const eachCharacter of charactersData) {
         renderOne(eachCharacter);
     }
+
+    const allCharactersLi = document.querySelectorAll('.js__allCharactersLi');
+
+    for(const eachLi of allCharactersLi) {
+        eachLi.addEventListener('click', handleCharacterClick);
+    }
 }
 
 //FUNCTIONS/EVENTS (HANDLER)
+
+function handleCharacterClick(event) {
+
+    const clickedLi = event.currentTarget;
+    clickedLi.classList.add('hidden');
+    clickedLi.classList.add('selected');
+    charactersFavourites.classList.remove('hidden');
+}
 
 
 //EVENTS       
