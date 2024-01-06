@@ -10,8 +10,9 @@
 
 const charactersResultUL = document.querySelector('.js__charactersResultUl');
 const charactersFavouritesUl = document.querySelector('.js__charactersFavouritesUl');
+const searchForm = document.querySelector('.js__searchForm');
 const charactersInput = document.querySelector('.js__charactersInput');
-const searchButton = document.querySelector('.js__searchButton');
+
 
 //DATA
 
@@ -43,6 +44,7 @@ function renderOne(characterData) {
 
 function renderAll() {
     charactersResultUL.innerHTML = '';
+
     for (const eachCharacter of charactersData) {
         renderOne(eachCharacter);
     }
@@ -96,10 +98,17 @@ function handleCharacterClick(event) {
 }
 
 //EVENTS   
-// searchForm.addEventListener('submit', function (event) {
-//     event.preventDefault();
-//     console.log('search form submitted');
-// }); 
+searchForm.addEventListener('submit', (event)=> {
+    event.preventDefault();
+
+    fetch(`//api.disneyapi.dev/character?name=${charactersInput.value}`)
+    .then(response => response.json())
+    .then(data => {
+         charactersData = data.data;
+
+        renderAll(charactersData);
+        })
+}); 
 
 //CODE TO RUN ON PAGE LOAD
 
@@ -110,4 +119,4 @@ fetch('//api.disneyapi.dev/character?pageSize=50')
        charactersData = data.data;
 
        renderAll(charactersData);
-    });
+    }); 
