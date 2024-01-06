@@ -10,6 +10,8 @@
 
 const charactersResultUL = document.querySelector('.js__charactersResultUl');
 const charactersFavouritesUl = document.querySelector('.js__charactersFavouritesUl');
+const charactersInput = document.querySelector('.js__charactersInput');
+const searchButton = document.querySelector('.js__searchButton');
 
 //DATA
 
