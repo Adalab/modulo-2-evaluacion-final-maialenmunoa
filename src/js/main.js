@@ -19,21 +19,21 @@ const favouritesData = [];
 
 //FUNCTIONS
 
-function renderOne(charactersData) {
-    const favouriteCharacterIndex = favouritesData.findIndex(oneCharacter => oneCharacter.id === charactersData.id );
+function renderOne(characterData) {
+    const favouriteCharacterIndex = favouritesData.findIndex(oneCharacter => oneCharacter.id === characterData.id );
 
     if(favouriteCharacterIndex === -1) {
         charactersResultUL.innerHTML += `
-        <li class="characters__item js__allCharactersLi" data_id=${charactersData.id}>
-            <img class="characters__image" src="${charactersData.imageUrl}" alt="Foto de ${charactersData.name}"></img>
-            <h3 class="characters__name">${charactersData.name}</h3>
+        <li class="characters__item js__allCharactersLi" data-_id=${characterData._id}>
+            <img class="characters__image" src="${characterData.imageUrl}" alt="Foto de ${characterData.name}"></img>
+            <h3 class="characters__name">${characterData.name}</h3>
         </li>
         `;
     } else {
         charactersResultUL.innerHTML += `
-        <li class="characters__item js__allCharactersLi selected" data_id=${charactersData.id}>
-            <img src="${charactersData.imageUrl}" alt="Foto de ${charactersData.name}"></img>
-            <h3>${charactersData.name}</h3>
+        <li class="characters__item js__allCharactersLi selected" data-id=${characterData.id}>
+            <img src="${characterData.imageUrl}" alt="Foto de ${characterData.name}"></img>
+            <h3>${characterData.name}</h3>
         </li>
         `;
     }
@@ -53,11 +53,11 @@ function renderAll() {
     }
 }
 
-function renderOneFavourite(favouritesData) {  
+function renderOneFavourite(favouriteData) {  
     charactersFavouritesUl.innerHTML += `
         <li class="characters__item">
-            <img src="${favouritesData.imageUrl}" alt="Foto de ${favouritesData.name}"></img>
-            <h3>${favouritesData.name}</h3>
+            <img src="${favouriteData.imageUrl}" alt="Foto de ${favouriteData.name}"></img>
+            <h3>${favouriteData.name}</h3>
         </li>
         `;
 } 
@@ -75,10 +75,11 @@ function renderFavourites() {
 function handleCharacterClick(event) {
 
     const clickedLi = event.currentTarget;
-    const clickedCharacterId = clickedLi.dataset.id;
-    const selectedCharacterData = charactersData.find(oneCharacter => oneCharacter.id === clickedCharacterId);
-    const favouriteCharacterIndex = favouritesData.findIndex(oneCharacter => oneCharacter.id === clickedCharacterId );  
-    
+    const clickedCharacterId = parseInt(clickedLi.dataset._id);
+
+    const selectedCharacterData = charactersData.find(oneCharacter => oneCharacter._id === clickedCharacterId);
+    const favouriteCharacterIndex = favouritesData.findIndex(oneCharacter => oneCharacter._id === clickedCharacterId );  
+
     if(favouriteCharacterIndex === -1) {
         favouritesData.push(selectedCharacterData);
     } else {
@@ -91,7 +92,6 @@ function handleCharacterClick(event) {
     charactersFavouritesUl.classList.remove('hidden');
     clickedLi.classList.toggle('selected');
 }
-
 
 //EVENTS   
 // searchForm.addEventListener('submit', function (event) {
