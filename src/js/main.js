@@ -20,7 +20,7 @@ const favouritesData = [];
 //FUNCTIONS
 
 function renderOne(characterData) {
-    const favouriteCharacterIndex = favouritesData.findIndex(oneCharacter => oneCharacter.id === characterData.id );
+    const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter.id === characterData.id );
 
     if(favouriteCharacterIndex === -1) {
         charactersResultUL.innerHTML += `
@@ -77,8 +77,8 @@ function handleCharacterClick(event) {
     const clickedLi = event.currentTarget;
     const clickedCharacterId = parseInt(clickedLi.dataset._id);
 
-    const selectedCharacterData = charactersData.find(oneCharacter => oneCharacter._id === clickedCharacterId);
-    const favouriteCharacterIndex = favouritesData.findIndex(oneCharacter => oneCharacter._id === clickedCharacterId );  
+    const selectedCharacterData = charactersData.find( (oneCharacter) => oneCharacter._id === clickedCharacterId );
+    const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter._id === clickedCharacterId );  
 
     if(favouriteCharacterIndex === -1) {
         favouritesData.push(selectedCharacterData);
