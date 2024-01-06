@@ -12,6 +12,7 @@ const charactersResultUL = document.querySelector('.js__charactersResultUl');
 const charactersFavouritesUl = document.querySelector('.js__charactersFavouritesUl');
 const searchForm = document.querySelector('.js__searchForm');
 const charactersInput = document.querySelector('.js__charactersInput');
+const errorMessage = document.querySelector('.js__errorMessage');
 
 
 //DATA
@@ -108,6 +109,16 @@ searchForm.addEventListener('submit', (event)=> {
 
         renderAll(charactersData);
         })
+
+        //si el personaje no está en la base de datos, mostrar mensaje de error
+        if(charactersData.length === 0 || isNaN(charactersInput)) {
+            errorMessage.classList.remove('hidden');
+        } else {        
+            errorMessage.classList.add('hidden');
+            renderAll(charactersData);
+        }
+
+        charactersInput.value = '';
 }); 
 
 //CODE TO RUN ON PAGE LOAD
@@ -120,3 +131,5 @@ fetch('//api.disneyapi.dev/character?pageSize=50')
 
        renderAll(charactersData);
     }); 
+
+charactersInput.value = '';
