@@ -20,7 +20,7 @@ const favouritesData = [];
 //FUNCTIONS
 
 function renderOne(characterData) {
-    const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter.id === characterData.id );
+    const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter._id === characterData.id );
 
     if(favouriteCharacterIndex === -1) {
         charactersResultUL.innerHTML += `
