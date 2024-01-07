@@ -23,14 +23,11 @@ const charactersTitle = document.querySelector('.js__charactersTitle');
 let charactersData = [];
 let favouritesData = [];
 
-let favouritesDataInLS = localStorage.getItem('favouritesData') || [];
+const favouritesDataInLS = localStorage.getItem('favouritesData');
 // let favouritesDataInLSParsed = JSON.parse(favouritesDataInLS);
 
-if (favouritesDataInLS !== null) {
+if (favouritesDataInLS) {
     favouritesData = JSON.parse(favouritesDataInLS);
-}
-else {  
-    favouritesData = [];
 }
 
 //FUNCTIONS
@@ -99,12 +96,12 @@ function handleCharacterClick(event) {
 
     if(favouriteCharacterIndex === -1) {
         favouritesData.push(selectedCharacterData);
-        localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
     } else {
         favouritesData.splice(favouriteCharacterIndex, 1);
-        localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
     }
-   
+
+    localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
+    
     renderFavourites(); 
 
     clickedLi.classList.remove('hidden');
