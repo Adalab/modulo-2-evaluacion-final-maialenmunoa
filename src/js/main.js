@@ -13,6 +13,7 @@ const charactersFavouritesUl = document.querySelector('.js__charactersFavourites
 const searchForm = document.querySelector('.js__searchForm');
 const charactersInput = document.querySelector('.js__charactersInput');
 const errorMessage = document.querySelector('.js__errorMessage');
+const charactersTitle = document.querySelector('.js__charactersTitle');
 
 
 //DATA
@@ -24,7 +25,7 @@ const favouritesData = [];
 //FUNCTIONS
 
 function renderOne(characterData) {
-    const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter._id === characterData.id );
+    const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter._id === characterData._id );
 
     if(favouriteCharacterIndex === -1) {
         charactersResultUL.innerHTML += `
@@ -35,7 +36,7 @@ function renderOne(characterData) {
         `;
     } else {
         charactersResultUL.innerHTML += `
-        <li class="characters__item selected js__allCharactersLi" data-id=${characterData.id}>
+        <li class="characters__item selected js__allCharactersLi" data-_id=${characterData._id}>
             <img src="${characterData.imageUrl}" alt="Foto de ${characterData.name}"></img>
             <h3>${characterData.name}</h3>
         </li>
@@ -108,16 +109,17 @@ searchForm.addEventListener('submit', (event)=> {
          charactersData = data.data;
 
         renderAll(charactersData);
-        })
 
         //si el personaje no está en la base de datos, mostrar mensaje de error
-        if(charactersData.length === 0 || isNaN(charactersInput)) {
+        if(charactersData.length === 0) {
             errorMessage.classList.remove('hidden');
         } else {        
             errorMessage.classList.add('hidden');
             renderAll(charactersData);
         }
-    charactersInput.value = '';
+
+    charactersTitle.innerHTML = `Resultados para "${charactersInput.value}"`;
+    });
 }); 
 
 //CODE TO RUN ON PAGE LOAD
