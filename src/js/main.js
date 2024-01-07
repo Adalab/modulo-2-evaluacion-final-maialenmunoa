@@ -117,8 +117,7 @@ searchForm.addEventListener('submit', (event)=> {
             errorMessage.classList.add('hidden');
             renderAll(charactersData);
         }
-
-        charactersInput.value = '';
+    charactersInput.value = '';
 }); 
 
 //CODE TO RUN ON PAGE LOAD

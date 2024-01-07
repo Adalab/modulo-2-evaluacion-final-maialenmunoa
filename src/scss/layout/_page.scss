@@ -91,6 +91,24 @@
         font-family: $font-title;
         font-size: $font-size-title;    
     }
+
+    &__error {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    &__error-msn {
+        font-family: $font-body;
+        font-size: $font-size-body;
+        color: red;
+        text-align: center;
+        margin: 20px 0;
+        //ponerlo en el centro
+        display: flex;
+        justify-content: center;
+
+    }
 }
 
 .main {
