@@ -10,8 +10,10 @@
 
 const charactersResultUL = document.querySelector('.js__charactersResultUl');
 const charactersFavouritesUl = document.querySelector('.js__charactersFavouritesUl');
+
 const searchForm = document.querySelector('.js__searchForm');
 const charactersInput = document.querySelector('.js__charactersInput');
+
 const errorMessage = document.querySelector('.js__errorMessage');
 const charactersTitle = document.querySelector('.js__charactersTitle');
 
@@ -19,8 +21,17 @@ const charactersTitle = document.querySelector('.js__charactersTitle');
 //DATA
 
 let charactersData = [];
-const favouritesData = [];
+let favouritesData = [];
 
+let favouritesDataInLS = localStorage.getItem('favouritesData') || [];
+// let favouritesDataInLSParsed = JSON.parse(favouritesDataInLS);
+
+if (favouritesDataInLS !== null) {
+    favouritesData = JSON.parse(favouritesDataInLS);
+}
+else {  
+    favouritesData = [];
+}
 
 //FUNCTIONS
 
@@ -88,8 +99,10 @@ function handleCharacterClick(event) {
 
     if(favouriteCharacterIndex === -1) {
         favouritesData.push(selectedCharacterData);
+        localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
     } else {
         favouritesData.splice(favouriteCharacterIndex, 1);
+        localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
     }
    
     renderFavourites(); 
@@ -129,6 +142,9 @@ searchForm.addEventListener('submit', (event)=> {
 
 //CODE TO RUN ON PAGE LOAD
 
+// Renderiza los favoritos al inicio
+renderFavourites();
+
 fetch('//api.disneyapi.dev/character?pageSize=50')
     .then(response => response.json())
     .then(data => {
@@ -137,5 +153,7 @@ fetch('//api.disneyapi.dev/character?pageSize=50')
 
        renderAll(charactersData);
     }); 
-
+ 
 charactersInput.value = '';
+// Renderiza los favoritos al inicio
+renderFavourites();
