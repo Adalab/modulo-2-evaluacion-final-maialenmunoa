@@ -24,7 +24,6 @@ let charactersData = [];
 let favouritesData = [];
 
 const favouritesDataInLS = localStorage.getItem('favouritesData');
-// let favouritesDataInLSParsed = JSON.parse(favouritesDataInLS);
 
 if (favouritesDataInLS) {
     favouritesData = JSON.parse(favouritesDataInLS);
@@ -32,20 +31,26 @@ if (favouritesDataInLS) {
 
 //FUNCTIONS
 
+/**
+ * Renderiza un solo personaje en la lista.
+ * @param {Object} characterData - Datos del personaje a renderizar.
+ */
+
 function renderOne(characterData) {
     const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter._id === characterData._id );
+    const imageUrl = characterData.imageUrl || "https://via.placeholder.com/210x295/ff9e06/ff46e1/?text=Disney";
 
     if(favouriteCharacterIndex === -1) {
         charactersResultUL.innerHTML += `
         <li class="characters__item js__allCharactersLi" data-_id=${characterData._id}>
-            <img class="characters__image" src="${characterData.imageUrl}" alt="Foto de ${characterData.name}"></img>
+            <img class="characters__image" src="${imageUrl}" alt="Foto de ${characterData.name}"></img>
             <h3 class="characters__name">${characterData.name}</h3>
         </li>
         `;
     } else {
         charactersResultUL.innerHTML += `
         <li class="characters__item selected js__allCharactersLi" data-_id=${characterData._id}>
-            <img class="characters__image" src="${characterData.imageUrl}" alt="Foto de ${characterData.name}"></img>
+            <img class="characters__image" src="${imageUrl}" alt="Foto de ${characterData.name}"></img>
             <h3 class="characters__name">${characterData.name}</h3>
         </li>
         `;
@@ -139,7 +144,6 @@ searchForm.addEventListener('submit', (event)=> {
 
 //CODE TO RUN ON PAGE LOAD
 
-// Renderiza los favoritos al inicio
 renderFavourites();
 
 fetch('//api.disneyapi.dev/character?pageSize=50')
@@ -152,5 +156,4 @@ fetch('//api.disneyapi.dev/character?pageSize=50')
     }); 
  
 charactersInput.value = '';
-// Renderiza los favoritos al inicio
-renderFavourites();
+
