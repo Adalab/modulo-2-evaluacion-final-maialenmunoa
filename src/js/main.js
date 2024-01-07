@@ -37,8 +37,8 @@ function renderOne(characterData) {
     } else {
         charactersResultUL.innerHTML += `
         <li class="characters__item selected js__allCharactersLi" data-_id=${characterData._id}>
-            <img src="${characterData.imageUrl}" alt="Foto de ${characterData.name}"></img>
-            <h3>${characterData.name}</h3>
+            <img class="characters__image" src="${characterData.imageUrl}" alt="Foto de ${characterData.name}"></img>
+            <h3 class="characters__name">${characterData.name}</h3>
         </li>
         `;
     }
@@ -106,16 +106,21 @@ searchForm.addEventListener('submit', (event)=> {
     fetch(`//api.disneyapi.dev/character?name=${charactersInput.value}`)
     .then(response => response.json())
     .then(data => {
-         charactersData = data.data;
-
-        renderAll(charactersData);
+        if (Array.isArray(data.data)) {
+            charactersData = data.data;
+        }
+        else {
+            charactersData = [];
+            charactersData.push(data.data);
+        }
+         
+        renderAll();
 
         //si el personaje no está en la base de datos, mostrar mensaje de error
         if(charactersData.length === 0) {
             errorMessage.classList.remove('hidden');
         } else {        
             errorMessage.classList.add('hidden');
-            renderAll(charactersData);
         }
 
     charactersTitle.innerHTML = `Resultados para "${charactersInput.value}"`;
