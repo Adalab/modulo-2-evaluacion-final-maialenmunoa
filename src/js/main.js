@@ -35,7 +35,7 @@ function renderOne(characterData) {
         `;
     } else {
         charactersResultUL.innerHTML += `
-        <li class="characters__item js__allCharactersLi selected" data-id=${characterData.id}>
+        <li class="characters__item selected js__allCharactersLi" data-id=${characterData.id}>
             <img src="${characterData.imageUrl}" alt="Foto de ${characterData.name}"></img>
             <h3>${characterData.name}</h3>
         </li>
