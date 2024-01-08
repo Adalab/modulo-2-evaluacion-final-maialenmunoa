@@ -18,6 +18,7 @@ const errorMessage = document.querySelector('.js__errorMessage');
 const charactersTitle = document.querySelector('.js__charactersTitle');
 
 const deleteCharacterBtn = document.querySelector('.js__deleteCharacterBtn');
+const resetBtn = document.querySelector('.js__resetBtn');
 
 
 
@@ -136,6 +137,15 @@ function handleCharacterClick(event) {
 // }
 
 // deleteCharacterBtn.addEventListener('click', handleDeleteCharacterClick);
+
+//Resetear lista de favoritos
+function handleResetClick() {
+    favouritesData = [];
+    localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
+    renderFavourites();
+}
+
+resetBtn.addEventListener('click', handleResetClick);
 
 //EVENTS   
 
