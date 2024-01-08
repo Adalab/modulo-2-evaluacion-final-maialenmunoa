@@ -3,6 +3,7 @@
     flex-flow: row wrap;
     justify-content: center;
     margin: auto;
+    gap: 5rem;
 
     &__favourites {
     margin-bottom: 1rem;
@@ -11,8 +12,8 @@
     }
 
     &__favourites-title {
-        font-family: "Roboto", sans-serif;
-        font-size: 20px;
+        font-family: $font-title;
+        font-size: $font-size-title; 
         text-align: center;
         font-weight: bold;
         color: #03033d;
@@ -23,8 +24,7 @@
         display: flex;
         flex-direction: column;
         gap: 25px;
-        margin-bottom: 70px;
-        padding: 0 0 1rem 5rem;
+        margin-bottom: 20px;
 
         @media (max-width: 768px) { 
             grid-template-columns: 1fr; 
@@ -75,7 +75,6 @@
         cursor: pointer;
        
     }
-    
 
     &__title {
         font-family: $font-title;
@@ -97,7 +96,6 @@
         grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 25px;
         margin-bottom: 70px;
-        padding: 0 0 1rem 5rem;
 
         @media (max-width: 768px) { 
             grid-template-columns: 1fr; 
@@ -129,11 +127,6 @@
         font-size: 14px;
         font-family: $font-body;
         text-align: center;
-      }
-
-    &__favourites-title {
-        font-family: $font-title;
-        font-size: $font-size-title;    
     }
 
     &__error {
@@ -156,16 +149,17 @@
 
     &__close-icon {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: -10px;
+        right: -10px;
         background-color: #ff0059;
         color: #ffffff;
         border-radius: 50%;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         text-align: center;
-        line-height: 20px;
+        line-height: 30px;
         cursor: pointer;
+        font-family: $font-body;
     }
 }
 
