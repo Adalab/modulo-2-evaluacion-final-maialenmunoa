@@ -93,8 +93,13 @@ function renderFavourites() {
     for (const eachFavourite of favouritesData) {
         renderOneFavourite(eachFavourite);    
     }
+    // Habilitar o deshabilitar el botón de reset
+    if(favouritesData.length === 0) {
+        resetBtn.disabled = true;
+    } else {
+        resetBtn.disabled = false;
+    }
 }
-
 
 
 //FUNCTIONS/EVENTS (HANDLER)
@@ -143,6 +148,11 @@ function handleResetClick() {
     favouritesData = [];
     localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
     renderFavourites();
+    //se quitael estilo de selected de los li de la lista de personajes
+    const allCharactersLi = document.querySelectorAll('.js__allCharactersLi');
+    for(const eachLi of allCharactersLi) {
+        eachLi.classList.remove('selected');
+    }
 }
 
 resetBtn.addEventListener('click', handleResetClick);
