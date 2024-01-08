@@ -17,6 +17,9 @@ const charactersInput = document.querySelector('.js__charactersInput');
 const errorMessage = document.querySelector('.js__errorMessage');
 const charactersTitle = document.querySelector('.js__charactersTitle');
 
+const deleteCharacterBtn = document.querySelector('.js__deleteCharacterBtn');
+
+
 
 //DATA
 
@@ -30,6 +33,7 @@ if (favouritesDataInLS) {
 }
 
 //FUNCTIONS
+
 
 /**
  * Renderiza un solo personaje en la lista.
@@ -76,6 +80,7 @@ function renderOneFavourite(favouriteData) {
     charactersFavouritesUl.innerHTML += `
         <li class="characters__item">
             <img src="${favouriteData.imageUrl}" alt="Foto de ${favouriteData.name}"></img>
+            <div class="characters__close-icon js__deleteCharacterBtn">X</div>
             <h3>${favouriteData.name}</h3>
         </li>
         `;
@@ -88,6 +93,8 @@ function renderFavourites() {
         renderOneFavourite(eachFavourite);    
     }
 }
+
+
 
 //FUNCTIONS/EVENTS (HANDLER)
 
@@ -114,7 +121,24 @@ function handleCharacterClick(event) {
     clickedLi.classList.toggle('selected');
 }
 
+// //función para borrar personajes de la lista de favoritos
+// function handleDeleteCharacterClick(event) {
+//     const clickedLi = event.currentTarget;
+//     const clickedCharacterId = parseInt(clickedLi.dataset._id);
+
+//     const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter._id === clickedCharacterId );  
+
+//     favouritesData.splice(favouriteCharacterIndex, 1);
+
+//     localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
+    
+//     renderFavourites(); 
+// }
+
+// deleteCharacterBtn.addEventListener('click', handleDeleteCharacterClick);
+
 //EVENTS   
+
 searchForm.addEventListener('submit', (event)=> {
     event.preventDefault();
 
@@ -156,4 +180,3 @@ fetch('//api.disneyapi.dev/character?pageSize=50')
     }); 
  
 charactersInput.value = '';
-
