@@ -17,7 +17,6 @@ const charactersInput = document.querySelector('.js__charactersInput');
 const errorMessage = document.querySelector('.js__errorMessage');
 const charactersTitle = document.querySelector('.js__charactersTitle');
 
-const deleteCharacterBtn = document.querySelector('.js__deleteCharacterBtn');
 const resetBtn = document.querySelector('.js__resetBtn');
 
 
@@ -81,7 +80,7 @@ function renderOneFavourite(favouriteData) {
     charactersFavouritesUl.innerHTML += `
         <li class="characters__favourites-item selected">
             <img class="characters__favourites-image" src="${favouriteData.imageUrl}" alt="Foto de ${favouriteData.name}"></img>
-            <div class="characters__close-icon js__deleteCharacterBtn">X</div>
+            <div class="characters__close-icon js__deleteCharacterBtn" data-_id=${favouriteData._id}>X</div>
             <h3 class="characters__favourites-name">${favouriteData.name}</h3>
         </li>
         `;
@@ -98,6 +97,11 @@ function renderFavourites() {
         resetBtn.classList.add('hidden');
     } else {
         resetBtn.classList.remove('hidden');
+
+        let deleteCharacterBtn = document.querySelectorAll('.js__deleteCharacterBtn');
+        deleteCharacterBtn.forEach(btn => {
+            btn.addEventListener('click', handleDeleteCharacterClick);
+        });    
     }
 }
 
@@ -127,21 +131,21 @@ function handleCharacterClick(event) {
     clickedLi.classList.toggle('selected');
 }
 
-// //función para borrar personajes de la lista de favoritos
-// function handleDeleteCharacterClick(event) {
-//     const clickedLi = event.currentTarget;
-//     const clickedCharacterId = parseInt(clickedLi.dataset._id);
+//función para borrar personajes de la lista de favoritos
+function handleDeleteCharacterClick(event) {
+    const clickedLi = event.currentTarget;
+    const clickedCharacterId = parseInt(clickedLi.dataset._id);
 
-//     const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter._id === clickedCharacterId );  
+    const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter._id === clickedCharacterId );  
 
-//     favouritesData.splice(favouriteCharacterIndex, 1);
+    favouritesData.splice(favouriteCharacterIndex, 1);
 
-//     localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
+    localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
     
-//     renderFavourites(); 
-// }
+    renderFavourites(); 
 
-// deleteCharacterBtn.addEventListener('click', handleDeleteCharacterClick);
+    renderAll();
+}
 
 //Resetear lista de favoritos
 function handleResetClick() {
