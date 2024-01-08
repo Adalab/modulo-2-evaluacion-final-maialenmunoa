@@ -78,10 +78,10 @@ function renderAll() {
 
 function renderOneFavourite(favouriteData) {  
     charactersFavouritesUl.innerHTML += `
-        <li class="characters__item">
-            <img src="${favouriteData.imageUrl}" alt="Foto de ${favouriteData.name}"></img>
+        <li class="characters__favourites-item selected">
+            <img class="characters__favourites-image" src="${favouriteData.imageUrl}" alt="Foto de ${favouriteData.name}"></img>
             <div class="characters__close-icon js__deleteCharacterBtn">X</div>
-            <h3>${favouriteData.name}</h3>
+            <h3 class="characters__favourites-name">${favouriteData.name}</h3>
         </li>
         `;
 } 
