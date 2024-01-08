@@ -32,6 +32,24 @@
         margin: 8px;
         border-radius: 10px;
     }
+
+    &__favourites-reset-div {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__favourites-reset-btn {
+        background-color: $color-primary;
+        color: white;
+        border: none;
+        padding: 6px 20px;
+        border-radius: 4px;
+        font-family: $font-body;
+        font-size: $font-size-body;
+        margin-left: 10px;
+        cursor: pointer;
+       
+    }
     
 
     &__title {
