@@ -20,7 +20,6 @@ const charactersTitle = document.querySelector('.js__charactersTitle');
 const resetBtn = document.querySelector('.js__resetBtn');
 
 
-
 //DATA
 
 let charactersData = [];
@@ -89,13 +88,20 @@ function renderOneFavourite(favouriteData) {
 function renderFavourites() {
     charactersFavouritesUl.innerHTML = '';
 
-    for (const eachFavourite of favouritesData) {
-        renderOneFavourite(eachFavourite);    
-    }
-    // Habilitar o deshabilitar el botón de reset
+    // Cuando no hay favoritos...
     if(favouritesData.length === 0) {
         resetBtn.classList.add('hidden');
-    } else {
+
+        charactersFavouritesUl.innerHTML += `
+        <li class="characters__favourites-message selected">
+            <p class="characters__favourites-message-text">Aún no has seleccionado ningún personaje favorito :(</p>
+        </li>
+        `;
+    } else { // Cuando hay favoritos...
+        for (const eachFavourite of favouritesData) {
+            renderOneFavourite(eachFavourite);    
+        }
+
         resetBtn.classList.remove('hidden');
 
         let deleteCharacterBtn = document.querySelectorAll('.js__deleteCharacterBtn');
