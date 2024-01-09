@@ -3,12 +3,12 @@
     flex-flow: row wrap;
     justify-content: center;
     margin: auto;
-    gap: 5rem;
+    gap: 0 5rem;
 
     &__favourites {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
     }
 
     &__favourites-title {
@@ -137,14 +137,13 @@
 
     &__error-msn {
         font-family: $font-body;
-        font-size: $font-size-body;
+        font-size: 20px;
         color: red;
-        text-align: center;
-        margin: 20px 0;
-        //ponerlo en el centro
-        display: flex;
-        justify-content: center;
 
+        @media (max-width: 768px) {
+            font-size: 18px;
+            text-align: center;
+        }
     }
 
     &__close-icon {
