@@ -1,26 +1,97 @@
-# Ejercicio Evaluación Final 💜 Módulo 2
+# Buscador de Personajes Disney
 
-En este ejercicio pongo en práctica los conocimientos adquiridos durante el Módulo 2 del Bootcamp de Programación Web de Adalab. Para esta evaluación he realizado una web para buscar personajes Disney con JavaScript, HTML y CSS. 
-Para la parte de JavaScript, he trabajado con querySelector, variables de datos, funciones, condicionales if/else if, eventos, fetch. 
+Este proyecto forma parte de la evaluación final del Módulo 2 del Bootcamp de Programación Web de Adalab. La web está diseñada para buscar y mostrar personajes famosos de Disney utilizando tecnologías como JavaScript, HTML y CSS.
 
-Tecnologías que utilizo en el ejercicio:
+### **Funcionalidades destacadas**
 
-- JavaScript
-- HTML
-- CSS
-- Sass
-- Flexbox
-- Formularios
+- Búsqueda de Personajes: La aplicación permite buscar personajes Disney utilizando un formulario intuitivo.
+- Lista de Favoritos: Las usuarias pueden marcar sus personajes favoritos y mantener una lista personalizada.
 
-### Link Github Pages 🌐
+### **Tecnologías utilizadas**
 
-https://beta.adalab.es/modulo-2-evaluacion-final-maialenmunoa/
+- JavaScript: para manejar la lógica principal del buscador, eventos y manipulación del DOM.
+- HTML & CSS: para la estructura y el diseño de la web.
+- Sass: para la mejora de estilos con el preprocesador Sass.
+- Flexbox: para la maquetación y disposición de elementos en la interfaz.
+- Formularios: implementación de un formulario para la búsqueda de personajes.
+
+## Link Github Pages 🌐
+
+Para ver el proyecto, visita el siguiente enlace: [Buscador de Personajes Disney](https://beta.adalab.es/modulo-2-evaluacion-final-maialenmunoa/)
+
+## Uso de Fetch para obtener datos de la API
+
+El proyecto utiliza una API de Disney para obtener información sobre personajes. Implementa la funcionalidad de búsqueda, aprovechando el método `fetch` de JavaScript para realizar peticiones a la API. Esto se realiza en el evento de envío del formulario para obtener los datos en respuesta a la búsqueda realizada por la usuaria:
+
+```javascript
+searchForm.addEventListener('submit', (event)=> {
+    event.preventDefault();
+
+    fetch(`//api.disneyapi.dev/character?name=${charactersInput.value}`)
+    .then(response => response.json())
+    .then(data => {
+        if (Array.isArray(data.data)) {
+            charactersData = data.data;
+        }
+        else {
+            charactersData = [];
+            charactersData.push(data.data);
+        }
+         
+        renderAll();
+
+        if(charactersData.length === 0) {
+            errorMessage.classList.remove('hidden');
+        } else {        
+            errorMessage.classList.add('hidden');
+        }
+        
+    charactersTitle.innerHTML = `Resultados para "${charactersInput.value}"`;
+    });
+}); 
+```
+
+## Uso de localStorage para el almacenamiento de datos:
+
+El proyecto hace uso del localStorage para almacenar los personajes marcados como favoritos por la usuaria. Después de agregar o eliminar un personaje de la lista de favoritos, se actualiza el localStorage para reflejar los cambios y mantenerlos entre sesiones:
+```javascript
+// Ejemplo de manipulación del localStorage después de agregar o eliminar un personaje favorito
+localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
+```
+
+## **Ejemplo de código**
+
+A continuación, se muestra un ejemplo de la función principal **handleCharacterClick** del archivo JavaScript que permite añadir o eliminar personajes de la lista de favoritos:
+
+```javascript
+function handleCharacterClick(event) {
+    const clickedLi = event.currentTarget;
+    const clickedCharacterId = parseInt(clickedLi.dataset._id);
+
+    const selectedCharacterData = charactersData.find( (oneCharacter) => oneCharacter._id === clickedCharacterId );
+    const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter._id === clickedCharacterId );  
+
+    if(favouriteCharacterIndex === -1) {
+        favouritesData.push(selectedCharacterData);
+    } else {
+        favouritesData.splice(favouriteCharacterIndex, 1);
+    }
+
+    localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
+    
+    updateAndRenderFavourites();
+
+    clickedLi.classList.remove('hidden');
+    charactersFavouritesUl.classList.remove('hidden');
+    clickedLi.classList.toggle('selected');
+}
+```
 
 ## Guía de inicio rápido 🔍
 
-Con estas instrucciones podrás tener una copia del ejercicio y ejecutarlo.
+Sigue estos pasos para clonar y ejecutar el proyecto en tu entorno local:
 
-> **NOTA:** Necesitas tener instalado [Node JS](https://nodejs.org/)
+> **NOTA:** Asegúrate de tener instalado [Node JS](https://nodejs.org/)
 
 ### Pasos para ejecutar el ejercicio ▶️
 
@@ -29,7 +100,7 @@ Ejecuta estos comandos en la terminal
 1. **Clona el repositorio**:
 
 ```bash
- git clone https://github.com/Adalab/modulo-2-evaluacion-intermedia-maialenmunoa.git
+ git clone https://beta.adalab.es/modulo-2-evaluacion-final-maialenmunoa/
 ```
 
 2. Instala las **dependencias locales**:
@@ -45,7 +116,7 @@ npm run dev
 ```
 
 Este comando:
-**Abre una ventana en el navegador y muestra la página web**
+**Abre automáticamente una ventana en el navegador y muestra la página web**
 
 ## Autoría 👩‍💻
 
