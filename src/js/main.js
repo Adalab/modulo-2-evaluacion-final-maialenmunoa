@@ -16,9 +16,9 @@ const resetBtn = document.querySelector('.js__resetBtn');
 
 //DATA
 
-// Declara una variable charactersData como un array vacío.
+// Declara la variable charactersData como un array vacío.
 let charactersData = [];
-// Declara una variable favouritesData como un array vacío.
+// Declara la variable favouritesData como un array vacío.
 let favouritesData = [];
 
 // Obtiene los datos de la lista de favoritos desde el localStorage.
@@ -36,7 +36,6 @@ if (favouritesDataInLS) {
  * Pinta un personaje en la lista de resultados.
  * @param {Object} characterData - datos del personaje a representar.
  */
-
 function renderOne(characterData) {
     // Encuentra el índice del personaje en la lista de favoritos (si existe).
     const favouriteCharacterIndex = favouritesData.findIndex( (oneCharacter) => oneCharacter._id === characterData._id );
@@ -67,7 +66,6 @@ function renderOne(characterData) {
 /**
  * Pinta todos los personajes en la lista de resultados.
  */
-
 function renderAll() {
     // Limpia el contenido actual de la lista de resultados.
     charactersResultUL.innerHTML = '';
@@ -88,7 +86,6 @@ function renderAll() {
  * Pinta un personaje favorito en la lista de favoritos.
  * @param {Object} favouriteData - datos del personaje favorito a representar.
  */
-
 function renderOneFavourite(favouriteData) { 
     // Agrega un nuevo elemento a la lista de favoritos con la información proporcionada. 
     charactersFavouritesUl.innerHTML += `
@@ -97,20 +94,19 @@ function renderOneFavourite(favouriteData) {
             <div class="characters__close-icon js__deleteCharacterBtn" data-_id=${favouriteData._id}>X</div>
             <h3 class="characters__favourites-name">${favouriteData.name}</h3>
         </li>
-        `;
+    `;
 } 
 
 /**
  * Pinta todos los personajes favoritos en la lista de favoritos o muestra un mensaje si no hay favoritos.
 */ 
-
 function renderFavourites() {
     // Borra el contenido actual de la lista de favoritos.
     charactersFavouritesUl.innerHTML = '';
 
     // Verifica si no hay favoritos.
     if(favouritesData.length === 0) {
-        // Oculta el botón de reinicio y muestra un mensaje indicando que no hay favoritos.
+        // Oculta el botón de reset y muestra un mensaje indicando que no hay favoritos.
         resetBtn.classList.add('hidden');
 
         charactersFavouritesUl.innerHTML += `
@@ -125,15 +121,16 @@ function renderFavourites() {
             renderOneFavourite(eachFavourite);    
         }
 
-        // Muestra el botón de reinicio y agrega eventos de clic a los botones de eliminación.
-        resetBtn.classList.remove('hidden');
+    // Muestra el botón de reset y agrega eventos de clic a los botones de eliminación.
+    resetBtn.classList.remove('hidden');
 
-        const deleteCharacterBtn = document.querySelectorAll('.js__deleteCharacterBtn');
+    const deleteCharacterBtn = document.querySelectorAll('.js__deleteCharacterBtn');
         deleteCharacterBtn.forEach(btn => {
             btn.addEventListener('click', handleDeleteCharacterClick);
         });    
     }
 }
+
 /**
  * Actualiza y pinta la lista de favoritos.
 */ 
@@ -143,6 +140,7 @@ function updateAndRenderFavourites() {
     renderAll();
 }
 
+
 //FUNCTIONS/EVENTS (HANDLER)
 
 /**
@@ -150,7 +148,6 @@ function updateAndRenderFavourites() {
  * Guarda los cambios en el localStorage.
  * @param {Event} event - el evento clic.
  */
-
 function handleCharacterClick(event) {
     // Obtiene el elemento clickeado y su ID.
     const clickedLi = event.currentTarget;
@@ -183,7 +180,6 @@ function handleCharacterClick(event) {
  * Ejecuta el evento de clic para eliminar un personaje de la lista de favoritos.
  * @param {Event} event - el evento clic.
  */
-
 function handleDeleteCharacterClick(event) {
     // Obtiene el elemento clickeado y su ID.
     const clickedLi = event.currentTarget;
@@ -223,6 +219,7 @@ function handleResetClick() {
 // Asigna un evento de clic al botón identificado como resetBtn, para ejecutar la función handleResetClick cuando se haga clic en él.
 resetBtn.addEventListener('click', handleResetClick);
 
+
 //EVENTS   
 
 // Asigna un evento de envío ('submit') al formulario identificado como searchForm.
@@ -258,10 +255,11 @@ searchForm.addEventListener('submit', (event)=> {
     });
 }); 
 
-//CODE TO RUN ON PAGE LOAD
 
-// Pinta la lista de favoritos
-renderFavourites();
+//CODE TO RUN ON PAGE LOAD 
+
+// Pinta todos los personajes
+updateAndRenderFavourites();
 
 // Realiza una solicitud a una API para obtener datos de personajes con un límite de 50 personajes por página.
 fetch('//api.disneyapi.dev/character?pageSize=50')
