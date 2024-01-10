@@ -134,6 +134,14 @@ function renderFavourites() {
         });    
     }
 }
+/**
+ * Actualiza y pinta la lista de favoritos.
+*/ 
+function updateAndRenderFavourites() {
+    renderFavourites();
+    // Vuelve a pintar todos los personajes para reflejar cambios en la lista principal.
+    renderAll();
+}
 
 //FUNCTIONS/EVENTS (HANDLER)
 
@@ -163,7 +171,7 @@ function handleCharacterClick(event) {
     localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
     
     // Pinta la lista de favoritos actualizada.
-    renderFavourites(); 
+    updateAndRenderFavourites();
 
     // Modifica las clases para mostrar u ocultar elementos según sea necesario.
     clickedLi.classList.remove('hidden');
@@ -190,11 +198,8 @@ function handleDeleteCharacterClick(event) {
     // Actualiza los datos de la lista de favoritos en el localStorage.
     localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
     
-    // Pinta la lista de favoritos actualizada.
-    renderFavourites(); 
-
-    // Vuelve a pintar todos los personajes para reflejar cambios posiblemente en la lista principal.
-    renderAll();
+    // Actualiza y pinta la lista de favoritos una vez que se han realizado los cambios.
+    updateAndRenderFavourites();
 }
 
 /**
