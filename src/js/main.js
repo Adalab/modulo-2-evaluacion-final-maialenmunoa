@@ -169,11 +169,6 @@ function handleCharacterClick(event) {
     
     // Pinta la lista de favoritos actualizada.
     updateAndRenderFavourites();
-
-    // Modifica las clases para mostrar u ocultar elementos según sea necesario.
-    clickedLi.classList.remove('hidden');
-    charactersFavouritesUl.classList.remove('hidden');
-    clickedLi.classList.toggle('selected');
 }
 
 /**
@@ -207,20 +202,14 @@ function handleResetClick() {
     localStorage.setItem('favouritesData', JSON.stringify(favouritesData));
     
     // Vuelve a pintar la lista de favoritos para reflejar los cambios.
-    renderFavourites();
-
-    // Quita el estilo 'selected' de los elementos de la lista de personajes.
-    const allCharactersLi = document.querySelectorAll('.js__allCharactersLi');
-    for(const eachLi of allCharactersLi) {
-        eachLi.classList.remove('selected');
-    }
+    updateAndRenderFavourites();
 }
-
-// Asigna un evento de clic al botón identificado como resetBtn, para ejecutar la función handleResetClick cuando se haga clic en él.
-resetBtn.addEventListener('click', handleResetClick);
 
 
 //EVENTS   
+
+// Asigna un evento de clic al botón identificado como resetBtn, para ejecutar la función handleResetClick cuando se haga clic en él.
+resetBtn.addEventListener('click', handleResetClick);
 
 // Asigna un evento de envío ('submit') al formulario identificado como searchForm.
 searchForm.addEventListener('submit', (event)=> {
